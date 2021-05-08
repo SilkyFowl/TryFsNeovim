@@ -19,14 +19,13 @@ jobs:
       with:
         dotnet-version: ${{ matrix.dotnet }}
 
-    - name: Build
+    - name: Setup ib
       run: |
-        dotnet tool restore
-        dotnet fake build
+        dotnet tool install --global ib
       env:
         CI: true
 
     - name: Test
-      run: dotnet fake build -t Test
+      run: ib Test
       env:
         CI: true
