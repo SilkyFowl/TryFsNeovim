@@ -1,0 +1,7 @@
+
+language: csharp
+dotnet: 5.0
+script:
+  - dotnet tool restore
+  - dotnet fake build
+  - dotnet fake build -t Test
