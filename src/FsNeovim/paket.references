@@ -1,0 +1,4 @@
+MessagePack
+FSharp.Core
+MessagePack.FSharpExtensions
+System.IO.Pipelines
