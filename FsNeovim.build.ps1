@@ -24,7 +24,7 @@ task Setup -If ($script:hasNotSetup) {
             Jobs = {
                 dotnet paket init
                 dotnet paket install
-                dotnet paket restore
+                dotnet restore
             }
         }
         @{
@@ -60,7 +60,7 @@ task Setup -If ($script:hasNotSetup) {
 
                 dotnet add $testProject reference $project
                 dotnet sln add $project
-                dotnet sln add $testProject
+                dotnet sln add $testProject                
             }
         }
     )
@@ -74,7 +74,7 @@ task Setup -If ($script:hasNotSetup) {
 
 # Synopsis: Build the project.
 task Build {
-    exec { dotnet build }
+    exec { dotnet build -c $Configuration }
 }
 
 # Synopsis: Remove temp files.

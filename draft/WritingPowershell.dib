@@ -1,3 +1,76 @@
+#!markdown
+
+## How to write PsModule
+
+利点
+- 基本的に早い
+- `Async`型や`Generic`、`Span<T>`を扱いやすい
+
+#!fsharp
+
+#r "nuget: PowerShellStandard.Library"
+#r "nuget: FSharp.Data"
+
+open FSharp.Control
+open FSharp.Data
+open System.Management.Automation
+
+#!fsharp
+
+[<Literal>]
+let autocomplete =
+    "https://azuresearch-usnc.nuget.org/autocomplete"
+
+/// Nuget API Client
+type NugetAutoComplete = JsonProvider<autocomplete>
+
+#!fsharp
+
+type NugetIdCompleter() =
+    let queryVersion id =
+        autocomplete + $"?id={id}&prerelease=true"
+        |> NugetAutoComplete.AsyncLoad
+    
+    let queryId q =
+        async {
+            let query = autocomplete + $"?q={q}&prerelease=true"
+            let! responce = NugetAutoComplete.AsyncLoad(query)
+
+            return
+                responce.Data
+                |> Array.map (fun id -> CompletionResult(id))
+                |> Array.toSeq
+        }
+
+    interface IArgumentCompleter with
+        member x.CompleteArgument(commandName, parameterName, wordToComplete, commandAst, fakeBoundParameters) =
+            async { return! queryId wordToComplete }
+            |> Async.RunSynchronously
+
+#!fsharp
+
+[<Cmdlet("Get", "NugetInfo")>]
+type GetNugetInfoCommand() =
+    inherit PSCmdlet()
+
+    [<Parameter>]
+    [<ArgumentCompleter(typeof<NugetIdCompleter>)>]
+    member val Id: string = "" with get, set
+
+    override x.EndProcessing() =
+        
+        x.WriteObject("Id is " + x.Id)
+        base.EndProcessing()
+
+#!markdown
+
+## Powershellで書く方法
+
+利点
+- ディレクトリ、Path周りが書きやすい
+
+#!pwsh
+
 function Add-PaketReferences {
     param (
         [parameter(Position = 0)]

@@ -1,10 +1,10 @@
-open NuGet.Protocol
-open NuGet.Protocol.Core.Types
-open NuGet.Common
-
 #r "nuget: NuGet.Protocol, 5.9.1"
 #r "nuget: FSharp.Control.AsyncSeq"
 #r "nuget: FSharp.Control.FusionTasks"
+#r "nuget: System.Management.Automation"
+open NuGet.Protocol
+open NuGet.Protocol.Core.Types
+open NuGet.Common
 
 let logger = NullLogger.Instance
 
