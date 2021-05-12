@@ -1,3 +1,4 @@
+Install-Module PSReadLine -AllowPrerelease -AcceptLicense -AllowClobber -Force
 $initProjectName=$PWD | Split-Path -Leaf
 
 #Init Profile

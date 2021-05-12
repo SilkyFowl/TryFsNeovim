@@ -12,27 +12,29 @@
 			"UPGRADE_PACKAGES": "false"
 		}
 	},
-
 	"settings": {
-		"terminal.integrated.shell.linux": "/bin/bash"
+		"terminal.integrated.defaultProfile.linux": "/usr/bin/pwsh"
 	},
-
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
-		"Ionide.Ionide-fsharp",
-		"ionide.ionide-fake",
-		"ionide.ionide-paket",
 		"ms-dotnettools.csharp",
-		"ms-vscode.powershell",
-		"formulahendry.dotnet-test-explorer"
+		"bierner.github-markdown-preview",
+		"github.vscode-pull-request-github",
+		"cschleiden.vscode-github-actions",
+		"Ionide.Ionide-fsharp",
+		"ionide.ionide-paket",
+		"formulahendry.dotnet-test-explorer",
+		"ms-vscode.powershell-preview",
+		"ms-dotnettools.dotnet-interactive-vscode"
 	],
-
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
-
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": ["pwsh","-File","./.devcontainer/library-scripts/postCreaded.ps1"],
-
+	"postCreateCommand": [
+		"pwsh",
+		"-File",
+		"./.devcontainer/library-scripts/postCreaded.ps1"
+	],
 	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode"
 }
