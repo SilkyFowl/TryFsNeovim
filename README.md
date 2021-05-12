@@ -1,5 +1,5 @@
-# FsNeovim
-FsNeovim is a MessagePack-rpc learning project that aims to be an F# client for Neovim, distributed under [MIT License](/LICENSE)
+# TryFsNeovim
+TryFsNeovim is a MessagePack-rpc learning project that aims to be an F# client for Neovim, distributed under [MIT License](/LICENSE)
 
 ## CI Status
 |||
